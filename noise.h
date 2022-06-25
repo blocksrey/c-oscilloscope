@@ -9,7 +9,7 @@
 #define mod(x, y) (fmod(x, y) + (x < 0)*y)
 #define fract(x) (x - floor(x))
 
-static inline float remap(float x) {
+static float remap(float x) {
 	return 2*(x < .5 ? x*x : .5 - (x - 1)*(x - 1));
 }
 
@@ -21,7 +21,7 @@ typedef struct noiseMap {
 float noiseMapSize = sizeof(noiseMap);
 float floatSize = sizeof(float);
 
-static inline noiseMap *noiseMapNew(int length, int dimensions) {
+static noiseMap *noiseMapNew(int length, int dimensions) {
 	int total = pow(length, dimensions);
 
 	noiseMap *map = (noiseMap *)malloc(noiseMapSize + floatSize*total);

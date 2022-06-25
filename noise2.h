@@ -3,15 +3,15 @@
 
 #include "noise.h"
 
-static inline int stitch2(int n, int x, int y) {
+static int stitch2(int n, int x, int y) {
 	return x%n + y%n*n;
 }
 
-static inline float interp2(float x, float y, float a, float b, float c, float d) {
+static float interp2(float x, float y, float a, float b, float c, float d) {
 	return a + (b - a)*x + (c - a)*y + (a - b - c + d)*x*y;
 }
 
-static inline float noise2(noiseMap *map, float *v) {
+static float noise2(noiseMap *map, float *v) {
 	int x = floor(v[0]);
 	int y = floor(v[1]);
 	return interp2(
