@@ -1,21 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "prim.h"
 #include "ppm.h"
-#include "math.h"
+#include "FasteMaths/trig.h"
+#include "FasteMaths/prim.h"
 
 #define W 600
 #define H 400
 
-static f32 pixels[W*H][3];
+static f32 pixels[W*H];
 
-#define SET_PIXEL(x, y, g) pixels[x + W*(y)][1] = g
-#define ADD_PIXEL(x, y, g) pixels[x + W*(y)][1] += g
-#define MUL_PIXEL(x, y, g) pixels[x + W*(y)][1] *= g
+#define SET_PIXEL(x, y, g) pixels[x + W*(y)] = g
+#define ADD_PIXEL(x, y, g) pixels[x + W*(y)] += g
+#define MUL_PIXEL(x, y, g) pixels[x + W*(y)] *= g
 #define LENGTH(a) (sizeof a/sizeof *a)
 #define DOT(x0, y0, x1, y1) ((x0)*(x1) + (y0)*(y1))
 #define DD(x0, y0) ((x0)*(x0) + (y0)*(y0))
-#define TAU 6.2831853f
 
 typedef struct {
 	f32 a;
@@ -28,15 +27,15 @@ static void dft(u16 n, f32 *v, fti *o) {
 		f32 y = 0;
 
 		for (u16 i = n; i--;) {
-			x += v[i]*COSP(TAU*(float)(f*i)/n);
-			y -= v[i]*SINP(TAU*(float)(f*i)/n);
+			x += v[i]*COSP(TAU*f*i/n);
+			y -= v[i]*SINP(TAU*f*i/n);
 		}
 
 		x /= n;
 		y /= n;
 
 		o[f].a = SQRT(x*x + y*y);
-		o[f].p = ATAN(x, y);
+		o[f].p = ATAN2(x, y);
 	}
 }
 
@@ -48,7 +47,6 @@ static f32 dc(u16 n, fti *o, f32 t, f32 x) {
 }
 
 int main() {
-	/*
 	f32 POINTS[] = {
 		94,302,
 		111,289,
@@ -156,8 +154,8 @@ int main() {
 		266,329,
 		276,346
 	};
-	*/
 
+	/*
 	f32 POINTS[] = {
 		453,98,
 		793,94,
@@ -235,8 +233,8 @@ int main() {
 		881,356,
 		866,363,
 		860,363
-
 	};
+	*/
 
 	u16 N = LENGTH(POINTS)/2;
 
@@ -271,7 +269,6 @@ int main() {
 
 	dft(N, xs, fx);
 	dft(N, ys, fy);
-
 
 
 	f32 dx;

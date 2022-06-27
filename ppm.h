@@ -2,9 +2,9 @@
 #define PPM_H
 
 #include <stdio.h>
-#include "math.h"
+#include "FasteMaths/maths.h"
 
-static void writePPM(float buffer[][3], int width, int height, char *path) {
+static void writePPM(f32 *buffer, u32 width, u32 height, char *path) {
 	FILE *fp = fopen(path, "w");
 
 	fprintf(fp, "P6\n%i %i\n255\n", width, height);
@@ -12,9 +12,9 @@ static void writePPM(float buffer[][3], int width, int height, char *path) {
 	for (int i = 0; i < width*height; ++i) fprintf(
 		fp,
 		"%c%c%c",
-		(char)MIN(100.0f*buffer[i][1], 255),
-		(char)MIN(255.0f*buffer[i][1], 255),
-		(char)MIN(150.0f*buffer[i][1], 255)
+		(i8)MIN(100*buffer[i], 255),
+		(i8)MIN(255*buffer[i], 255),
+		(i8)MIN(150*buffer[i], 255)
 	);
 
 	fclose(fp);
