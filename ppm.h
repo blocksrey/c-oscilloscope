@@ -2,7 +2,7 @@
 #define PPM_H
 
 #include <stdio.h>
-#include "FasteMaths/maths.h"
+#include "libMaths/maths.h"
 
 static void writePPM(f32 *buffer, u32 width, u32 height, char *path) {
 	FILE *fp = fopen(path, "w");

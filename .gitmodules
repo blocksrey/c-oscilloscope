@@ -1,0 +1,3 @@
+[submodule "libMaths"]
+	path = libMaths
+	url = https://github.com/Blocksrey/libMaths
