@@ -1,5 +1,5 @@
 # Coscilloscope
-A software-rendered oscilloscope simulation written in C. Doesn't depend on the C standard library.
+A software-rendered oscilloscope simulation written in C, independent of the C standard math library.
 
 ![](assets/stop.gif)
 
