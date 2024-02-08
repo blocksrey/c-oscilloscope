@@ -8,7 +8,7 @@ A software-rendered oscilloscope simulation written in C, independent of the C s
 
 # Build Instructions
 ```sh
-clang main.c -o coscilloscope
+cc main.c -o coscilloscope
 ```
 
 # Execution
